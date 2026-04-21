@@ -1,0 +1,249 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0a0a0b;
+  --bg-1: #101012;
+  --bg-2: #17171a;
+  --surface: rgba(16,16,18,0.60);
+  --surface-solid: #101012;
+  --surface-hover: #1f1f23;
+  --border: rgba(255,255,255,0.10);
+  --border-strong: rgba(255,255,255,0.22);
+  --divider: rgba(255,255,255,0.06);
+  --text: #f5f5f5;
+  --text-muted: #a3a3a3;
+  --text-subtle: #737373;
+  --text-faint: #525252;
+  --grid-bg: rgba(255,255,255,0.10);
+  --font-display: 'Space Grotesk', 'Inter', sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  color-scheme: dark;
+}
+
+html.light {
+  --bg: #faf7f2;
+  --bg-1: #f3ece0;
+  --bg-2: #ebe2d1;
+  --surface: rgba(255,255,255,0.85);
+  --surface-solid: #ffffff;
+  --surface-hover: #f3ece0;
+  --border: rgba(20,14,4,0.10);
+  --border-strong: rgba(20,14,4,0.22);
+  --divider: rgba(20,14,4,0.08);
+  --text: #1a1410;
+  --text-muted: #5c534a;
+  --text-subtle: #7a6f63;
+  --text-faint: #a69b8e;
+  --grid-bg: rgba(20,14,4,0.10);
+  --font-display: 'Fraunces', 'Playfair Display', serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+  color-scheme: light;
+}
+
+html { scroll-behavior: smooth; background: var(--bg); }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  transition: background-color 500ms ease, color 500ms ease;
+}
+
+@layer components {
+  .container-px { @apply px-6 md:px-10 lg:px-16; }
+  .section { @apply py-24 md:py-32; }
+  .h-display { @apply font-display tracking-tight; }
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-neutral-400;
+  }
+  .eyebrow::before {
+    content: '';
+    @apply inline-block h-px w-8;
+    background-image: linear-gradient(to right, #fbbf24, #f97316, #dc2626);
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-all duration-300;
+  }
+  .btn-primary {
+    @apply text-white hover:scale-[1.02] shadow-[0_8px_30px_-10px_rgba(249,115,22,0.6)];
+    background-image: linear-gradient(to right, #fbbf24, #f97316, #dc2626);
+    background-size: 200% 100%;
+    background-position: 0% 0%;
+    transition: background-position 400ms ease, transform 300ms ease;
+  }
+  .btn-primary:hover {
+    background-position: 100% 0%;
+  }
+  .text-gradient-accent {
+    background-image: linear-gradient(to right, #fbbf24, #f97316, #dc2626);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .bg-gradient-accent {
+    background-image: linear-gradient(to right, #fbbf24, #f97316, #dc2626);
+  }
+  .btn-ghost {
+    @apply border border-white/15 text-white hover:bg-white/5 hover:border-white/30;
+  }
+  .card-surface {
+    @apply rounded-2xl border border-white/10 bg-ink-900/60 backdrop-blur-sm;
+    position: relative;
+    transition: transform 500ms cubic-bezier(.2,.8,.2,1), border-color 500ms ease;
+  }
+  .card-surface::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(251,191,36,.0), rgba(249,115,22,.6), rgba(220,38,38,.0));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 500ms ease;
+    pointer-events: none;
+  }
+  .card-surface:hover::before { opacity: 1; }
+  .nav-link {
+    position: relative;
+    @apply text-sm text-neutral-300 transition-colors duration-300 hover:text-white;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 100%;
+    bottom: -6px;
+    height: 1.5px;
+    background-image: linear-gradient(to right, #fbbf24, #f97316, #dc2626);
+    transition: right 400ms cubic-bezier(.2,.8,.2,1);
+  }
+  .nav-link:hover::after { right: 0; }
+  .ember-line {
+    position: relative;
+    height: 1px;
+    overflow: hidden;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,.08), transparent);
+  }
+  .ember-line::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, transparent, #f97316, transparent);
+    transform: translateX(-100%);
+    animation: ember 4s ease-in-out infinite;
+  }
+}
+
+@keyframes ember {
+  0%, 100% { transform: translateX(-100%); opacity: 0; }
+  50%      { transform: translateX(100%);  opacity: 1; }
+}
+@keyframes kenburns {
+  0%   { transform: scale(1.05) translate3d(0,0,0); }
+  100% { transform: scale(1.15) translate3d(-1%,1%,0); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0;  }
+}
+.animate-kenburns { animation: kenburns 9s ease-out both; }
+
+/* subtle grain */
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 3px 3px;
+  mix-blend-mode: overlay;
+  opacity: .35;
+}
+
+/* hide scrollbar for carousels */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ================================================================
+   THEME OVERRIDES — map existing tailwind utilities to CSS vars so
+   light mode inherits cleanly without touching component JSX.
+   ================================================================ */
+
+/* backgrounds */
+.bg-ink-950 { background-color: var(--bg) !important; }
+.bg-ink-900 { background-color: var(--bg-1) !important; }
+.bg-ink-800 { background-color: var(--bg-2) !important; }
+.bg-ink-900\/40 { background-color: color-mix(in srgb, var(--bg-1) 60%, transparent) !important; }
+.bg-ink-900\/60 { background-color: color-mix(in srgb, var(--bg-1) 75%, transparent) !important; }
+.bg-ink-900\/80 { background-color: color-mix(in srgb, var(--bg-1) 90%, transparent) !important; }
+.bg-ink-950\/70 { background-color: color-mix(in srgb, var(--bg) 82%, transparent) !important; }
+.bg-ink-950\/80 { background-color: color-mix(in srgb, var(--bg) 88%, transparent) !important; }
+.bg-ink-950\/95 { background-color: color-mix(in srgb, var(--bg) 97%, transparent) !important; }
+.bg-ink-950\/75 { background-color: color-mix(in srgb, var(--bg) 82%, transparent) !important; }
+.bg-ink-950\/60 { background-color: color-mix(in srgb, var(--bg) 70%, transparent) !important; }
+
+/* borders + divides */
+.border-white\/5  { border-color: var(--divider) !important; }
+.border-white\/10 { border-color: var(--border) !important; }
+.border-white\/15 { border-color: var(--border) !important; }
+.border-white\/20 { border-color: var(--border-strong) !important; }
+.border-white\/30 { border-color: var(--border-strong) !important; }
+.divide-white\/5 > :not([hidden]) ~ :not([hidden]) { border-color: var(--divider) !important; }
+
+/* surface chips (bg-white/5 etc) */
+.bg-white\/5  { background-color: color-mix(in srgb, var(--text) 5%,  transparent) !important; }
+.bg-white\/10 { background-color: color-mix(in srgb, var(--text) 10%, transparent) !important; }
+
+/* text */
+.text-neutral-100 { color: var(--text) !important; }
+.text-neutral-200 { color: var(--text) !important; }
+.text-neutral-300 { color: color-mix(in srgb, var(--text) 80%, var(--text-muted)) !important; }
+.text-neutral-400 { color: var(--text-muted) !important; }
+.text-neutral-500 { color: var(--text-subtle) !important; }
+.text-neutral-600 { color: var(--text-faint) !important; }
+.text-white { color: var(--text) !important; }
+
+/* ghost button readability in light */
+html.light .btn-ghost { @apply border text-[color:var(--text)]; }
+html.light .btn-ghost:hover { background: color-mix(in srgb, var(--text) 6%, transparent); }
+
+/* btn-primary keeps gradient but white label works on both themes */
+.btn-primary { color: #fff !important; }
+
+/* navbar scrolled shadow tuned for light */
+html.light .card-surface { backdrop-filter: none; }
+html.light .ember-line {
+  background: linear-gradient(to right, transparent, rgba(20,14,4,.12), transparent);
+}
+
+/* map iframe — grayscale inversion works better for light mode */
+html.light iframe[title="Workshop location"] { filter: none; }
+
+/* selection color adapts */
+html.light ::selection { background: rgba(249,115,22,.25); color: #1a1410; }
+
+/* h-display uses theme font */
+.h-display { font-family: var(--font-display); }
+
+/* radial highlight overlays — keep them orange so they read on both themes */
+
+/* theme toggle icon */
+.theme-toggle {
+  position: relative;
+  width: 2.75rem;
+  height: 2.75rem;
+  display: grid;
+  place-items: center;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+  transition: background-color 300ms ease, border-color 300ms ease, transform 300ms ease;
+  color: var(--text);
+}
+.theme-toggle:hover {
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  border-color: var(--border-strong);
+}
+.theme-toggle svg { transition: transform 400ms cubic-bezier(.2,.8,.2,1); }
+.theme-toggle:hover svg { transform: rotate(25deg); }
