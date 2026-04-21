@@ -3,7 +3,6 @@ import { ArrowUpRight, Phone, ChevronDown } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
 const heroImages = [
-  'https://images.unsplash.com/photo-1632823471565-1ecdf5c6da77?auto=format&fit=crop&w=2000&q=80',
   'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=2000&q=80',
   'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=2000&q=80',
   'https://images.unsplash.com/photo-1625047509168-a7026f36de04?auto=format&fit=crop&w=2000&q=80',
