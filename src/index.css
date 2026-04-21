@@ -23,22 +23,22 @@
 }
 
 html.light {
-  --bg: #faf7f2;
-  --bg-1: #f3ece0;
-  --bg-2: #ebe2d1;
-  --surface: rgba(255,255,255,0.85);
+  --bg: #ffffff;
+  --bg-1: #f7f7f7;
+  --bg-2: #eeeeee;
+  --surface: rgba(255,255,255,0.90);
   --surface-solid: #ffffff;
-  --surface-hover: #f3ece0;
-  --border: rgba(20,14,4,0.10);
-  --border-strong: rgba(20,14,4,0.22);
-  --divider: rgba(20,14,4,0.08);
-  --text: #1a1410;
-  --text-muted: #5c534a;
-  --text-subtle: #7a6f63;
-  --text-faint: #a69b8e;
-  --grid-bg: rgba(20,14,4,0.10);
-  --font-display: 'Fraunces', 'Playfair Display', serif;
-  --font-body: 'Manrope', system-ui, sans-serif;
+  --surface-hover: #f2f2f2;
+  --border: rgba(0,0,0,0.10);
+  --border-strong: rgba(0,0,0,0.25);
+  --divider: rgba(0,0,0,0.08);
+  --text: #0a0a0a;
+  --text-muted: #525252;
+  --text-subtle: #737373;
+  --text-faint: #a3a3a3;
+  --grid-bg: rgba(0,0,0,0.10);
+  --font-display: 'Space Grotesk', 'Inter', sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
   color-scheme: light;
 }
 
@@ -165,6 +165,35 @@ body {
 /* hide scrollbar for carousels */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ============ hero: simple white in light mode ============ */
+html.light [data-hero] [data-hero-bg] { display: none; }
+html.light [data-hero] {
+  background: #ffffff;
+  border-bottom: 1px solid var(--border);
+}
+html.light [data-hero] .text-neutral-300\/90 { color: var(--text-muted) !important; }
+
+/* ============ custom global scrollbar ============ */
+html { scrollbar-width: thin; scrollbar-color: #f97316 transparent; }
+html::-webkit-scrollbar,
+body::-webkit-scrollbar { width: 10px; height: 10px; }
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  background: var(--bg-1);
+}
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background-image: linear-gradient(to bottom, #fbbf24, #f97316, #dc2626);
+  border-radius: 999px;
+  border: 2px solid var(--bg-1);
+}
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover {
+  border-width: 1px;
+}
+html::-webkit-scrollbar-corner,
+body::-webkit-scrollbar-corner { background: var(--bg-1); }
 
 /* ================================================================
    THEME OVERRIDES — map existing tailwind utilities to CSS vars so

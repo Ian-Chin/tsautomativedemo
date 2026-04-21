@@ -42,9 +42,12 @@ export default function Hero() {
   }, [])
 
   return (
-    <section className="relative isolate flex h-screen min-h-[640px] w-full flex-col overflow-hidden">
+    <section
+      data-hero
+      className="relative isolate flex h-screen min-h-[640px] w-full flex-col overflow-hidden"
+    >
       {/* Backdrop carousel with ken-burns */}
-      <div className="absolute inset-0 -z-10">
+      <div data-hero-bg className="absolute inset-0 -z-10">
         {/* preload all so there's no black flash between transitions */}
         {heroImages.map((src) => (
           <img key={src} src={src} alt="" aria-hidden className="hidden" />

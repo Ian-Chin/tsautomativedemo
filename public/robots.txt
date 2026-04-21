@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Disallow technical assets (optional; all assets served from /assets/ are fine to index)
+Disallow: /api/
+
+Sitemap: https://ts-automotive.vercel.app/sitemap.xml
+Host: https://ts-automotive.vercel.app
